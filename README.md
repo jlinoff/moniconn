@@ -26,7 +26,7 @@ data collection.
 
 The bars at the bottom are the failures.
 
-It is based on a run was initiated like this:
+It is based on a run that was initiated like this:
 
 ```bash
 make week
@@ -83,6 +83,9 @@ These environment variables control the behavior of moniconn.sh.
 #   VERBOSE=2     VERBOSE=1 + report connection errors
 #   VERBOSE=3     VERBOSE=2 + sample status
 ```
+
+### ctrl-c snapshot
+You can type `ctrl-c` during a run to see a snapshot of the progress and then continue.
 
 ### calculate seconds until midnight
 This came up while analyzing another problem and i thought that it was worth saving.
