@@ -87,8 +87,11 @@ These environment variables control the behavior of moniconn.sh.
 #   VERBOSE=3     VERBOSE=2 + sample status
 ```
 
-### ctrl-c snapshot
-You can type `ctrl-c` during a run to see a snapshot of the progress and then continue.
+### snapshots
+You can type `ctrl-c` during a `moniconn.sh` run to see a snapshot of the progress and then continue.
+
+You can view the intermediate results in the CSV file at any time. That is how the plot example was
+generated and explains why it doesn't cover a full week.
 
 ### calculate seconds until midnight
 This came up while analyzing another problem and i thought that it was worth saving.
