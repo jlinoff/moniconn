@@ -22,6 +22,10 @@ and a recent version of _gnuplot_ (5.x).
 This is an example of a plot that was generated from a weeks worth of
 data collection.
 
+<img src="plot-example.png" alt="plot-example">
+
+The bars at the bottom are the failures.
+
 It is based on a run was initiated like this:
 
 ```bash
