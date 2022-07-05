@@ -39,9 +39,6 @@ to see how reliable it is. The data can also be presented
 to your internet service provider (ISP) to help track
 down service problems.
 
-There is a companion project call `monispeed` that collects
-performance data. See that project for more details.
-
 ### get an hourly report:
 
 ```bash
