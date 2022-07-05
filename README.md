@@ -12,7 +12,7 @@ The `moniconn.sh` _bash_ script collects data about the internet and
 gateway router connections (typically WiFi) and stores it in a CSV
 (comma separated variable) format file.
 
-The generated CSV data file can then be read by `plot-conn.gp`
+The generated CSV data file can then be read by the `plot-conn.gp`
 _gnuplot script_ to generate a simple plot that the shows the
 downtimes.
 
