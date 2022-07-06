@@ -38,20 +38,29 @@ if ( strlen(otype) > 0 && otype ne '.png' ) {
     exit
 }
 
+# collect stats from interesting columns
+# Figure out the max value for the error columns and add a bit.
+set datafile separator ','
+stats csv_file using 4  # success
+ymax = STATS_max
+total_time = STATS_sum
+stats csv_file using 6  # wifi errors
+ymax = STATS_max > ymax ? STATS_max : ymax
+total_time = total_time + STATS_sum
+stats csv_file using 8  # internet errors
+ymax = STATS_max > ymax ? STATS_max : ymax
+total_time = total_time + STATS_sum
+total_errs = STATS_sum
+uptime = 100. * (1. - total_errs / total_time)
+uptime_str = sprintf("%.5f%", uptime)
+print "uptime: " , uptime_str
+
 if (bargraph_plot ) {
-    # Figure out the max value for the error columns and add a bit.
-    set datafile separator ','
-    stats csv_file using 4  # success
-    ymax = STATS_max
-    stats csv_file using 6  # wifi errors
-    ymax = STATS_max > ymax ? STATS_max : ymax
-    stats csv_file using 8  # internet errors
-    ymax = STATS_max > ymax ? STATS_max : ymax
     set yrange [0:ymax]
 }
 
 # set title
-title_string=sprintf("Service Downtime\nin %s\n%s to %s", csv_file, edate, ldate)
+title_string=sprintf("Service Downtime\nin %s\n%s to %s\nuptime: %s", csv_file, edate, ldate, uptime_str)
 
 # Initialize
 set datafile separator ','
