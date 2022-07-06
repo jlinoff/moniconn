@@ -13,6 +13,16 @@ define hdr
         @printf '\033[0m\n'
 endef
 
+.PHONY: interval
+interval: | $(REQUIRED)  ## Make a custom interval report. Must set START and STOP times. Example: make interval START=13:00 STOP=17:00
+	$(call hdr,"$@-$(START)-to-$(STOP)")
+	BASE="moniconn-$(START)-to-$(STOP)" && \
+	CSV="$$BASE-$@.csv" && \
+	LOG="$$BASE-$@.log" && \
+	VERBOSE=2 START=$(START) STOP=$(STOP) CSV="$$CSV" \
+		./moniconn.sh 2>&1 | tee -i -a "$$LOG" && \
+	if [ -f "$$CSV" ] ; then ./plot-conn.gp "$$CSV" ; fi
+
 .PHONY: hour
 hour: | $(REQUIRED)  ## Make an hourly report starting at the beginning of the next hour and display plot when done.
 	$(call hdr,"$@")

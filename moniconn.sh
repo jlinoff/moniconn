@@ -180,8 +180,14 @@ if [ -n "$START" ] ; then
 fi
 
 if [ -n "$STOP" ] ; then
-    STOP_DATE=$(date -d "$START_DATE + $STOP" --iso-8601=second)
-    STOP_DATE_SEC=$(date -d "$START_DATE + $STOP" +'%s')
+    if echo "$STOP" | grep -q -E '(-|:)' ; then
+        # Handle explicit STOP dates like STOP=9:30
+        STOP_DATE=$(date -d "$STOP" --iso-8601=second)
+        STOP_DATE_SEC=$(date -d "$STOP" +'%s')
+    else
+        STOP_DATE=$(date -d "$START_DATE + $STOP" --iso-8601=second)
+        STOP_DATE_SEC=$(date -d "$START_DATE + $STOP" +'%s')
+    fi
 fi
 
 # Initialize loop variables
