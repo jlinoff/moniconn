@@ -29,12 +29,7 @@ data collection.
 
 The bars at the bottom are the failures.
 
-It is based on a run that was initiated like this:
-
-```bash
-make week
-```
-
+It is based on a run that was initiated like this: `make hour-now`.
 To see more make targets type `make help`.
 
 These tools you be used to monitor your interconnection
@@ -58,6 +53,24 @@ make day
 
 ```bash
 make weekly
+```
+
+### make help
+```bash
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+=-=-= Target: help 
+=-=-= Date: Wed Jul  6 07:38:17 PDT 2022 
+=-=-= Directory: /Users/jlinoff/work/moniconn 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Targets
+   day          Make a daily report for the next full day and display plot when done.
+   help         this help message
+   hour         Make an hourly report starting at the beginning of the next hour and display plot when done.
+   hour-now     Make an hourly report starting now and display plot when done.
+   week         Make a weekly report starting the next full day and display plot when done.
+
 ```
 
 ### moniconn.sh environment variables
@@ -90,8 +103,7 @@ These environment variables control the behavior of moniconn.sh.
 ### snapshots
 You can type `ctrl-c` during a `moniconn.sh` run to see a snapshot of the progress and then continue.
 
-You can view the intermediate results in the CSV file at any time. That is how the plot example was
-generated and explains why it doesn't cover a full week.
+You can view the intermediate results in the CSV file at any time.
 
 ### calculate seconds until midnight
 This came up while analyzing another problem and i thought that it was worth saving.
