@@ -18,8 +18,8 @@ downtimes.
 The tools require _gnu date_, a recent version of _bash_ (5.x)
 and a recent version of _gnuplot_ (5.x).
 
-If you are interested in how i setup my mac please see the gist:
-[How i setup my Mac for development](https://gist.github.com/jlinoff/adb0a9b886085d9f3a4719571cfad901)
+> If you are interested in how i setup my mac please see the gist:
+> [How i setup my Mac for development](https://gist.github.com/jlinoff/adb0a9b886085d9f3a4719571cfad901)
 
 This is an example of a plot that was generated from an hours worth of
 data collection.
