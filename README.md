@@ -35,6 +35,9 @@ These tools can be used to monitor your interconnection to see how
 reliable it is. The data and plot can also be presented to your
 internet service provider (ISP) to help track down service problems.
 
+To check the speed of your internect connection
+check out [monispeed](https://github.com/jlinoff/monispeed).
+
 ### get an hourly report:
 
 ```bash
