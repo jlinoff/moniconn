@@ -5,8 +5,7 @@ internet connections. It contains two tools: `moniconn.sh` and
 `plot-conn.gp`.
 
 It was written because I was experiencing intermittent service failures
-and wanted to keep track of them over time so that i could present
-them to my ISP.
+and wanted to keep track of them over time.
 
 The `moniconn.sh` _bash_ script collects data about the internet and
 gateway router connections (typically WiFi) and stores it in a CSV
@@ -32,10 +31,9 @@ The bars at the bottom are the failures.
 It is based on a run that was initiated like this: `make hour-now`.
 To see more make targets type `make help`.
 
-These tools you be used to monitor your interconnection
-to see how reliable it is. The data can also be presented
-to your internet service provider (ISP) to help track
-down service problems.
+These tools can be used to monitor your interconnection to see how
+reliable it is. The data and plot can also be presented to your
+internet service provider (ISP) to help track down service problems.
 
 ### get an hourly report:
 
