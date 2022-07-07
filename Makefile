@@ -16,7 +16,7 @@ endef
 .PHONY: interval
 interval: | $(REQUIRED)  ## Make a custom interval report. Must set START and STOP times. Example: make interval START=13:00 STOP=17:00
 	$(call hdr,"$@-$(START)-to-$(STOP)")
-	BASE="moniconn-$(START)-to-$(STOP)" && \
+	@BASE="moniconn-$(START)-to-$(STOP)" && \
 	CSV="$$BASE-$@.csv" && \
 	LOG="$$BASE-$@.log" && \
 	VERBOSE=2 START=$(START) STOP=$(STOP) CSV="$$CSV" \
@@ -26,7 +26,7 @@ interval: | $(REQUIRED)  ## Make a custom interval report. Must set START and ST
 .PHONY: hour
 hour: | $(REQUIRED)  ## Make an hourly report starting at the beginning of the next hour and display plot when done.
 	$(call hdr,"$@")
-	BASE="moniconn-$$(date -d '+1 hour' +%F)" && \
+	@BASE="moniconn-$$(date -d '+1 hour' +%F)" && \
 	CSV="$$BASE-$@.csv" && \
 	LOG="$$BASE-$@.log" && \
 	START=$$(date +'%Y-%m-%dT%H:%M:00' -d '+1 hour') && \
@@ -37,7 +37,7 @@ hour: | $(REQUIRED)  ## Make an hourly report starting at the beginning of the n
 .PHONY: hour-now
 hour-now: | $(REQUIRED)  ## Make an hourly report starting now and display plot when done.
 	$(call hdr,"$@")
-	BASE="moniconn-$$(date -d '+1 hour' +%F)" && \
+	@BASE="moniconn-$$(date -d '+1 hour' +%F)" && \
 	CSV="$$BASE-$@.csv" && \
 	LOG="$$BASE-$@.log" && \
 	VERBOSE=2 STOP='1 hour' CSV="$$CSV" \
@@ -47,7 +47,7 @@ hour-now: | $(REQUIRED)  ## Make an hourly report starting now and display plot 
 .PHONY: day
 day: | $(REQUIRED)  ## Make a daily report for the next full day and display plot when done.
 	$(call hdr,"$@")
-	BASE="moniconn-$$(date -d '+1 $@' +%F)" && \
+	@BASE="moniconn-$$(date -d '+1 $@' +%F)" && \
 	LOG="$$BASE-$@.log" && \
 	CSV="$$BASE-$@.csv" && \
 	VERBOSE=2 START="23:59" STOP='1 day' CSV="$$CSV" \

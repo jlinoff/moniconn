@@ -105,7 +105,6 @@ Settings
    Stop Condition (STOP)     : "$STOP"
    Capture Data File (CSV)   : $CSV
    Capture Interval (CI)     : $CI seconds
-   Sample Count              : $SC
    Sample Interval (SI)      : $SI seconds
    Samples Per Capture (SBC) : $SPC
    Verbosity Level (VERBOSE) : $VERBOSE
@@ -176,7 +175,13 @@ STOP_DATE_SEC=0
 
 if [ -n "$START" ] ; then
     START_DATE=$(date -d "$START" --iso-8601=second)
-    START_DATE_SECS=$(( $(date -d "$START" +'%s') - $(date +'%s') ))
+    START_DATE_SLEEP_SEC=$(( $(date -d "$START" +'%s') - $(date +'%s') ))
+    if (( $(date -d "$START" +'%s') < $(date +'%s') )) ; then
+        _info $LINENO "NOW    : $(date +'%s') $(date --iso-8601=second)"
+        _info $LINENO "START  : $(date -d "$START" +'%s') $(date -d "$START" --iso-8601=second)"
+        _err "$LINENO" "START earlier than NOW"
+        exit 1
+    fi
 fi
 
 if [ -n "$STOP" ] ; then
@@ -188,6 +193,17 @@ if [ -n "$STOP" ] ; then
         STOP_DATE=$(date -d "$START_DATE + $STOP" --iso-8601=second)
         STOP_DATE_SEC=$(date -d "$START_DATE + $STOP" +'%s')
     fi
+    if [ -n "$START" ] ; then
+        START_DATE_SEC=$(date -d "$START" +'%s')
+        if (( STOP_DATE_SEC < START_DATE_SEC )) ; then
+            _info "$LINENO" "STOP_DATE  : $STOP_DATE"
+            _info "$LINENO" "START_DATE : $START_DATE"
+            _info "$LINENO" "STOP_DATE_SEC  : $STOP_DATE_SEC"
+            _info "$LINENO" "START_DATE_SEC : $START_DATE_SEC"
+            _err "$LINENO" "STOP earlier than START"
+            exit 1
+        fi
+    fi
 fi
 
 # Initialize loop variables
@@ -197,11 +213,11 @@ SPC=$(( CI / SI ))
 settings
 
 # wait until stat condition is met
-if (( START_DATE_SECS )) ; then
+if (( START_DATE_SLEEP_SEC )) ; then
     if (( VERBOSE )) ; then
-        _info "$LINENO" "waiting ($START_DATE_SECS) for start condition ($START): $START_DATE"
+        _info "$LINENO" "waiting ($START_DATE_SLEEP_SEC) for start condition ($START): $START_DATE"
     fi
-    sleep $START_DATE_SECS
+    sleep $START_DATE_SLEEP_SEC
 fi
 
 # wait until capture boundary to start
