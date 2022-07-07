@@ -76,7 +76,4 @@ help:  ## this help message
 		column -t -s '##' | \
 		sort -f | \
 		sed -e 's@^@   @'
-#	@printf "\n\033[35;1m%s\n" "Variables"
-#	@printf '    DST  : %s\n' $(DST)
-#	@printf '    PORT : %s\n' $(PORT)
 	@printf "\033[0m\n"

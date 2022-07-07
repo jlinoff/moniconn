@@ -215,14 +215,15 @@ settings
 # wait until stat condition is met
 if (( START_DATE_SLEEP_SEC )) ; then
     if (( VERBOSE )) ; then
-        _info "$LINENO" "waiting ($START_DATE_SLEEP_SEC) for start condition ($START): $START_DATE"
+        _info "$LINENO" "waiting $START_DATE_SLEEP_SEC seconds for start condition ($START): $START_DATE"
     fi
     sleep $START_DATE_SLEEP_SEC
 fi
 
 # wait until capture boundary to start
 if (( VERBOSE )) ; then
-    _info "$LINENO" "waiting for capture interval boundary (up to $CI seconds)"
+    SLEEP_TIME=$(( CI - ($(date +%s) % CI ) ))
+    _info "$LINENO" "waiting for capture the $CI second interval boundary ($SLEEP_TIME seconds)"
 fi
 pause_until "$CI"
 
