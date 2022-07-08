@@ -38,6 +38,8 @@
 #   VERBOSE=3     VERBOSE=2 + sample status
 #   VERBOSE=4     VERBOSE=3 + debug messages
 #
+# Try to figure out the default wifi ip address.
+# The user can override it by setting WIFI_IP=... manually.
 WIFI_IP_=$(ifconfig | \
                grep 'inet ' | \
                grep -v '127.0.0.1' | \

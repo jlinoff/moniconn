@@ -38,6 +38,30 @@ internet service provider (ISP) to help track down service problems.
 To check the speed of your internect connection
 check out [monispeed](https://github.com/jlinoff/monispeed).
 
+### how the intermediate wifi ip is determined
+
+The `moniconn.sh` script figures out the wifi IP address automatically
+by running `ifconfig` and looking for a likely candidate, see how the
+`WIFI_IP_` (note the trailing underscore) variable is set in
+`moniconn.sh`. Something like this
+
+```bash
+# Try to figure out the default WIFI_IP address.
+# It sets in a temp variable (not the trailing underscore).
+# The user can override it by setting WIFI_IP=... manually.
+WIFI_IP_=$(ifconfig | \
+               grep 'inet ' | \
+               grep -v '127.0.0.1' | \
+               awk '{print $2}'  | \
+               sed -E 's/\.[0-9]+$/.1/' | \
+               head -1 2>/dev/null)
+```
+
+This approach should work just fine for most setups but, if it does
+not, simply set the `WIFI_IP` (note that there is _no_ trailing
+underscore) manually.
+
+
 ### get an hourly report:
 
 ```bash
