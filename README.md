@@ -53,7 +53,7 @@ make day
 ### get a weekly report:
 
 ```bash
-make weekly
+make week
 ```
 
 ### make help
