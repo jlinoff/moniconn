@@ -64,6 +64,15 @@ week: | $(REQUIRED)  ## Make a weekly report starting the next full day and disp
 		./moniconn.sh 2>&1 | tee -i -a "$$LOG" && \
 	if [ -f "$$CSV" ] ; then ./plot-conn.gp "$$CSV" ; fi
 
+.PHONY: month
+month: | $(REQUIRED)  ## Make a monthly report starting the next full day and display plot when done.
+	$(call hdr,"$@")
+	BASE="moniconn-$$(date -d '+1 day' +%F)" && \
+	CSV="$$BASE-$@.csv" && \
+	LOG="$$BASE-$@.log" && \
+	VERBOSE=2 START="23:59" STOP='1 month' CSV="$$CSV" \
+		./moniconn.sh 2>&1 | tee -i -a "$$LOG" && \
+	if [ -f "$$CSV" ] ; then ./plot-conn.gp "$$CSV" ; fi
 
 .PHONY: help
 help:  ## this help message

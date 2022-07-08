@@ -71,6 +71,7 @@ Targets
    hour         Make an hourly report starting at the beginning of the next hour and display plot when done.
    hour-now     Make an hourly report starting now and display plot when done.
    interval     Make a custom interval report. Must set START and STOP times. Example: make interval START=13:00 STOP=17:00
+   month        Make a monthly report starting the next full day and display plot when done.
    week         Make a weekly report starting the next full day and display plot when done.
 
 ```
