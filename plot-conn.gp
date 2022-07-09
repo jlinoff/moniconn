@@ -59,7 +59,7 @@ print "uptime: " , uptime_str
 
 if (bargraph_plot ) {
     set yrange [0:ymax]
-    y2max = y2max < 1 ? 10 : 0
+    y2max = y2max < 10 ? 10 : y2max
     set y2range [0:y2max]
 }
 
