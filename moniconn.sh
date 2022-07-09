@@ -38,20 +38,21 @@
 #   VERBOSE=3     VERBOSE=2 + sample status
 #   VERBOSE=4     VERBOSE=3 + debug messages
 #
-# Try to figure out the default wifi ip address.
+# Try to figure out the default WIFI_IP address.
+# It sets in a temp variable.
 # The user can override it by setting WIFI_IP=... manually.
-WIFI_IP_=$(ifconfig | \
-               grep 'inet ' | \
-               grep -v '127.0.0.1' | \
-               awk '{print $2}'  | \
-               sed -E 's/\.[0-9]+$/.1/' | \
-               head -1 2>/dev/null)
+WIFI_IP_DEFAULT=$(ifconfig | \
+                      grep 'inet ' | \
+                      grep -v '127.0.0.1' | \
+                      awk '{print $2}'  | \
+                      sed -E 's/\.[0-9]+$/.1/' | \
+                      head -1 2>/dev/null)
 
 : "${CSV=moniconn.csv}"
 : "${SI:=5}"
 : "${CI:=300}"
 : "${INTERNET_URL:=www.google.com}"
-: "${WIFI_IP:=$WIFI_IP_}"
+: "${WIFI_IP:=$WIFI_IP_DEFAULT}"
 : "${PING:=ping -t 1 -c 1}"
 : "${STOP:=}"
 : "${START:=}"

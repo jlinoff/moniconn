@@ -43,18 +43,18 @@ check out [monispeed](https://github.com/jlinoff/monispeed).
 The `moniconn.sh` script figures out the wifi IP address automatically
 by running `ifconfig` and looking for a likely candidate, see how the
 `WIFI_IP_` (note the trailing underscore) variable is set in
-`moniconn.sh`. Something like this
+`moniconn.sh`. Something like this:
 
 ```bash
 # Try to figure out the default WIFI_IP address.
 # It sets in a temp variable (not the trailing underscore).
 # The user can override it by setting WIFI_IP=... manually.
-WIFI_IP_=$(ifconfig | \
-               grep 'inet ' | \
-               grep -v '127.0.0.1' | \
-               awk '{print $2}'  | \
-               sed -E 's/\.[0-9]+$/.1/' | \
-               head -1 2>/dev/null)
+WIFI_IP_DEFAULT=$(ifconfig | \
+                      grep 'inet ' | \
+                      grep -v '127.0.0.1' | \
+                      awk '{print $2}'  | \
+                      sed -E 's/\.[0-9]+$/.1/' | \
+                      head -1 2>/dev/null)
 ```
 
 This approach should work just fine for most setups but, if it does
