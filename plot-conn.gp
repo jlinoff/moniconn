@@ -63,7 +63,8 @@ if (bargraph_plot ) {
 }
 
 # set title
-title_string=sprintf("Service Downtime\nin %s\n%s to %s\nuptime: %s", csv_file, edate, ldate, uptime_str)
+title_string=sprintf("Service Downtime\nin %s\n%s to %s\nuptime: %s", \
+                              csv_file, edate, ldate, uptime_str)
 
 # Initialize
 set datafile separator ','
