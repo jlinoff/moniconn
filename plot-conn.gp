@@ -59,6 +59,7 @@ print "uptime: " , uptime_str
 
 if (bargraph_plot ) {
     set yrange [0:ymax]
+    y2max = y2max < 1 ? 10 : 0
     set y2range [0:y2max]
 }
 
@@ -103,14 +104,6 @@ if ( strlen(png_file) == 0 ) {
 }
 
 # plot
-#show term
-#set palette model RGB defined ( 0 'forest-green', 1 'light-red' )
-#plot csv_file using 2:8:($8 < 1 ? 0 : 1) with linespoints palette pt 5 lw 2 title "internet connect failures", \
-#     csv_file using 2:4 with linespoints lc rgb "forest-green" pt 5 lw 2 title "connect successes"
-##plot csv_file using 2:8 with linespoints lc rgb "red" pt 5 lw 2 title "internet failure", \
-##     csv_file using 2:4 with linespoints lc rgb "red" pt 5 lw 2 dashtype 3 title "wifi failure", \
-##     csv_file using 2:4 with linespoints lc rgb "forest-green" pt 5 lw 2 title "connect success"
-
 if ( bargraph_plot ) {
     set style fill solid 0.5 border lt -1
     #set boxwidth 2 relative
