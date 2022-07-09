@@ -46,9 +46,11 @@ ymax = STATS_max
 total_time = STATS_sum
 stats csv_file using 6  # wifi errors
 ymax = STATS_max > ymax ? STATS_max : ymax
+y2max = STATS_max
 total_time = total_time + STATS_sum
 stats csv_file using 8  # internet errors
 ymax = STATS_max > ymax ? STATS_max : ymax
+y2max = STATS_max > y2max ? STATS_max : y2max
 total_time = total_time + STATS_sum
 total_errs = STATS_sum
 uptime = 100. * (1. - total_errs / total_time)
@@ -57,6 +59,7 @@ print "uptime: " , uptime_str
 
 if (bargraph_plot ) {
     set yrange [0:ymax]
+    set y2range [0:y2max]
 }
 
 # set title
@@ -73,7 +76,12 @@ set format x "%a\n%m-%d\n%H:%M"
 #set title "Internet Connectivity Service Downtime\nin conn.csv\n$earliest_date to $latest_date"
 set title title_string
 set xlabel "date/time"
-set ylabel "downtime (secs)"
+set ylabel "uptime (secs)"
+set y2label "downtime (secs)"
+
+set ytics nomirror
+set y2tics
+
 
 # show some setup info
 # show term
@@ -107,9 +115,9 @@ if ( bargraph_plot ) {
     #set boxwidth 2 relative
     set boxwidth -2
     set grid ytics
-    plot csv_file using 2:8 with boxes lc rgb "red" lw 2 title "internet failure", \
-         '' using 2:6 with boxes lc rgb "blue" lw 2 title "wifi failure", \
-         '' using 2:4 with linespoints lc rgb "forest-green" pt 5 lw 2 title "success"
+    plot csv_file using 2:8 with boxes axes x1y2 lc rgb "red" lw 1 title "internet failure", \
+         '' using 2:6 with boxes axes x1y2 lc rgb "blue" lw 1 title "wifi failure", \
+         '' using 2:4 with linespoints lc rgb "forest-green" pt 5 lw 2 title "success",
 } else {
     #plot csv_file using 2:4 with linespoints lc rgb "forest-green" pt 5 lw 1 title "connect success", \
           
