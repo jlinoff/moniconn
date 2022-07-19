@@ -80,6 +80,13 @@ make day
 make week
 ```
 
+To extract a single day use `plot-day.sh` like this:
+```bash
+./plot-day.sh 2022-07-19 moniconn-2022-07-18-month.csv
+```
+
+> Note that the `moniconn-2022-07-18-month.csv` file was created by running `make month`.
+
 ### make help
 ```bash
 
