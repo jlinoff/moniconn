@@ -43,13 +43,14 @@ if ( strlen(otype) > 0 && otype ne '.png' ) {
 set datafile separator ','
 stats csv_file using 4  # success
 ymax = STATS_max
+ymax = ymax + (10 - (int(ymax) % 10))
 total_time = STATS_sum
 stats csv_file using 6  # wifi errors
-ymax = STATS_max > ymax ? STATS_max : ymax
+#ymax = STATS_max > ymax ? STATS_max : ymax
 y2max = STATS_max
 total_time = total_time + STATS_sum
 stats csv_file using 8  # internet errors
-ymax = STATS_max > ymax ? STATS_max : ymax
+#ymax = STATS_max > ymax ? STATS_max : ymax
 y2max = STATS_max > y2max ? STATS_max : y2max
 total_time = total_time + STATS_sum
 total_errs = STATS_sum
@@ -58,8 +59,15 @@ uptime_str = sprintf("%.5f%", uptime)
 print "uptime: " , uptime_str
 
 if (bargraph_plot ) {
-    set yrange [0:ymax]
     y2max = y2max < 10 ? 10 : y2max
+    if (y2max > ymax) {
+        ymax = y2max
+    } else {
+        if ( y2max >= (ymax / 2)) {
+            y2max = ymax
+        }
+    }
+    set yrange [0:ymax]
     set y2range [0:y2max]
 }
 
@@ -114,7 +122,7 @@ if ( bargraph_plot ) {
          '' using 2:4 with linespoints lc rgb "forest-green" pt 5 lw 2 title "success",
 } else {
     #plot csv_file using 2:4 with linespoints lc rgb "forest-green" pt 5 lw 1 title "connect success", \
-          
+
     plot csv_file using 2:8 with linespoints lc rgb "red" pt 5 lw 1 title "internet failure", \
          '' using 2:6 with linespoints lc rgb "blue" pt 5 lw 1 title "wifi failure"
 }
