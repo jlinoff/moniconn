@@ -58,8 +58,7 @@ WIFI_IP_DEFAULT=$(ifconfig | \
 ```
 
 This approach should work just fine for most setups but, if it does
-not, simply set the `WIFI_IP` (note that there is _no_ trailing
-underscore) manually.
+not, simply set the `WIFI_IP` variable manually.
 
 
 ### get an hourly report:
