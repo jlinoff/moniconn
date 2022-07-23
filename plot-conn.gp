@@ -63,7 +63,7 @@ if (bargraph_plot ) {
     if (y2max > ymax) {
         ymax = y2max
     } else {
-        if ( y2max >= (ymax / 2)) {
+        if ( y2max >= (ymax / 4)) {
             y2max = ymax
         }
     }
