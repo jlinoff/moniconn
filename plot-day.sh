@@ -37,6 +37,9 @@ fi
 
 GP=$(ls -1 *.gp)
 OUT="/tmp/plot-day-$PATTERN.csv"
-head -1 "$CSV" > "$OUT"
+rm -f $OUT
+if head -1 "$CSV" | grep -v 'type,' ; then
+    head -1 "$CSV" > "$OUT"
+fi
 grep "$PATTERN" "$CSV" >> "$OUT"
 ./"$GP" "$OUT"
