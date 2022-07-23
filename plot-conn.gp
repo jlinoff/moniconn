@@ -79,7 +79,7 @@ title_string=sprintf("Service Downtime\nin %s\n%s to %s\nuptime: %s", \
 set datafile separator ','
 set xdata time                          # tells gnuplot the x axis is time data
 set timefmt "%Y-%m-%dT%H:%M:%S-07:00"   # specify our time string format
-set format x "%a\n%m-%d\n%H:%M"
+set format x "%a\n%m-%d\n%H:%M\%a"
 #set format x "%m-%dT%H:%M"
 #set xtics rotate by -45
 
