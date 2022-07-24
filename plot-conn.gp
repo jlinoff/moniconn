@@ -59,12 +59,17 @@ uptime_str = sprintf("%.5f%", uptime)
 print "uptime: " , uptime_str
 
 if (bargraph_plot ) {
-    y2max = y2max < 10 ? 10 : y2max
-    if (y2max > ymax) {
-        ymax = y2max
+    if (y2max < 10) {
+        y2max = 10
     } else {
-        if ( y2max >= (ymax / 4)) {
-            y2max = ymax
+        if (y2max > ymax) {
+            ymax = y2max
+        } else {
+            if ( y2max >= (ymax / 4)) {
+                y2max = ymax
+            } else {
+                y2max = y2max + int(y2max / 10)
+            }
         }
     }
     set yrange [0:ymax]
