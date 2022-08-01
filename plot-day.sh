@@ -38,8 +38,12 @@ fi
 GP=$(ls -1 *.gp)
 OUT="/tmp/plot-day-$PATTERN.csv"
 rm -f "$OUT"
-if grep -q 'type,timestamp' "$OUT" ; then
+if grep -q 'type,timestamp' "$CSV" ; then
     head -1 "$CSV" > "$OUT"
 fi
 grep "$PATTERN" "$CSV" >> "$OUT"
-./"$GP" "$OUT"
+if (( $? == 0 )) ; then
+    ./"$GP" "$OUT"
+else
+    _err "$LINENO" "pattern '$PATTERN' not found in $CSV"
+fi
